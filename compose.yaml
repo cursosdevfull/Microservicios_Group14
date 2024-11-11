@@ -1,0 +1,28 @@
+services:
+  server-mysql:
+    image: mysql:8
+    container_name: server-mysql
+    ports:
+      - "4100:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: template_db
+      MYSQL_USER: template_user
+      MYSQL_PASSWORD: 12345
+    networks:
+      - mysql-net
+
+  client-mysql:
+    image: phpmyadmin
+    container_name: client-mysql
+    ports:
+      - "4101:80"
+    environment:
+      PMA_ARBITRARY: 1
+    networks:
+      - mysql-net
+
+networks:
+  mysql-net:
+    driver: bridge
+    name: mysql-net
