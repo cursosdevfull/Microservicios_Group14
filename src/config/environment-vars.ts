@@ -9,6 +9,7 @@ export type ReturnEnvironmentVars = {
   mysqlUser: string;
   mysqlPassword: string;
   mysqlDatabase: string;
+  rabbitmqHost: string;
 };
 
 export type EnvironmentVars = {
@@ -18,6 +19,7 @@ export type EnvironmentVars = {
   MYSQL_USER: string;
   MYSQL_PASSWORD: string;
   MYSQL_DATABASE: string;
+  RABBITMQ_HOST: string;
 };
 
 type ValidationEnvironmentVars = {
@@ -36,6 +38,7 @@ function validateEnvironmentVars(
       MYSQL_USER: joi.string().required(),
       MYSQL_PASSWORD: joi.string().required(),
       MYSQL_DATABASE: joi.string().required(),
+      RABBITMQ_HOST: joi.string().required(),
     })
     .unknown(true);
 
@@ -59,6 +62,7 @@ function loadEnvironmentVars(): ReturnEnvironmentVars {
     mysqlUser: value.MYSQL_USER,
     mysqlPassword: value.MYSQL_PASSWORD,
     mysqlDatabase: value.MYSQL_DATABASE,
+    rabbitmqHost: value.RABBITMQ_HOST,
   };
 }
 
