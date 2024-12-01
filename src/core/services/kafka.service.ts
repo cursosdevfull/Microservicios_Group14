@@ -1,9 +1,7 @@
-import { Consumer, Kafka, Partitioners, Producer } from "kafkajs";
+import { Consumer, Partitioners, Producer } from "kafkajs";
 
-const kafka = new Kafka({
-  clientId: "client01",
-  brokers: ["localhost:9092"],
-});
+import { KafkaBootstrap } from "../../bootstrap/kafka.bootstrap";
+import envs from "../../config/environment-vars";
 
 let producer: Producer;
 let consumer: Consumer;
@@ -15,7 +13,7 @@ const createTopic = async (topicList: string[]) => {
     replicationFactor: 1,
   }));
 
-  const admin = kafka.admin();
+  const admin = KafkaBootstrap.getInstanceKafka().admin();
   await admin.connect();
   const topicExists = await admin.listTopics();
 
@@ -31,13 +29,13 @@ const createTopic = async (topicList: string[]) => {
 };
 
 const connectProducer = async () => {
-  await createTopic(["test-topic"]);
+  await createTopic([envs.kafkaTopic]);
 
   if (producer) {
     return producer;
   }
 
-  producer = kafka.producer({
+  producer = KafkaBootstrap.getInstanceKafka().producer({
     createPartitioner: Partitioners.DefaultPartitioner,
   });
 
@@ -49,4 +47,22 @@ const disconnectProducer = async () => {
   if (producer) {
     await producer.disconnect();
   }
+};
+
+const connectConsumer = async () => {
+  if (consumer) {
+    return consumer;
+  }
+  consumer = KafkaBootstrap.getInstanceKafka().consumer({
+    groupId: envs.kafkaGroupId,
+  });
+
+  await consumer.connect();
+  return consumer;
+};
+
+export const MessageBrokerKafka = {
+  connectProducer,
+  disconnectProducer,
+  connectConsumer,
 };

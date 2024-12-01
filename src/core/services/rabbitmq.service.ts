@@ -1,15 +1,15 @@
-import { Channel, connect, Connection, ConsumeMessage } from "amqplib";
+import { Channel, Connection, ConsumeMessage } from "amqplib";
 
 import { RabbitmqRepository } from "./rabbitmq.repository";
 
 let connection: Connection;
 let channel: Channel;
 
-(async () => {
+/* (async () => {
   connection = await connect("amqp://localhost");
   channel = await connection.createChannel();
   console.log("Connected to RabbitMQ");
-})();
+})(); */
 
 export class RabbitmqService implements RabbitmqRepository {
   async createExchange(exchangeName: string, type: string): Promise<void> {

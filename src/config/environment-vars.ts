@@ -10,6 +10,10 @@ export type ReturnEnvironmentVars = {
   mysqlPassword: string;
   mysqlDatabase: string;
   rabbitmqHost: string;
+  kafkaBroker: string;
+  kafkaTopic: string;
+  kafkaGroupId: string;
+  clientId: string;
 };
 
 export type EnvironmentVars = {
@@ -20,6 +24,10 @@ export type EnvironmentVars = {
   MYSQL_PASSWORD: string;
   MYSQL_DATABASE: string;
   RABBITMQ_HOST: string;
+  KAFKA_BROKER: string;
+  KAFKA_TOPIC: string;
+  KAFKA_GROUP_ID: string;
+  CLIENT_ID: string;
 };
 
 type ValidationEnvironmentVars = {
@@ -39,6 +47,10 @@ function validateEnvironmentVars(
       MYSQL_PASSWORD: joi.string().required(),
       MYSQL_DATABASE: joi.string().required(),
       RABBITMQ_HOST: joi.string().required(),
+      KAFKA_BROKER: joi.string().required(),
+      KAFKA_TOPIC: joi.string().required(),
+      KAFKA_GROUP_ID: joi.string().required(),
+      CLIENT_ID: joi.string().required(),
     })
     .unknown(true);
 
@@ -63,6 +75,10 @@ function loadEnvironmentVars(): ReturnEnvironmentVars {
     mysqlPassword: value.MYSQL_PASSWORD,
     mysqlDatabase: value.MYSQL_DATABASE,
     rabbitmqHost: value.RABBITMQ_HOST,
+    kafkaBroker: value.KAFKA_BROKER,
+    kafkaTopic: value.KAFKA_TOPIC,
+    kafkaGroupId: value.KAFKA_GROUP_ID,
+    clientId: value.CLIENT_ID,
   };
 }
 
