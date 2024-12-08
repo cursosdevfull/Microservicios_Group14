@@ -31,7 +31,7 @@ export class AppointmentInfrastructure implements AppointmentRepository {
   async publish(appointment: Appointment): Promise<void> {
     ProducerService.publish(
       appointment.properties(),
-      "appoinment-created",
+      "appoinment-completed",
       appointment.properties().countryIso
     );
   }

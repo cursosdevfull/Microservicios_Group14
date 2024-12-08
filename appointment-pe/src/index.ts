@@ -6,12 +6,10 @@ import { ReturnType } from "./bootstrap/bootstrap.type";
 import { DatabaseBootstrap } from "./bootstrap/database.bootstrap";
 import { KafkaBootstrap } from "./bootstrap/kafka.bootstrap";
 import { ServerBootstrap } from "./bootstrap/server.bootstrap";
+import { ConsumerService } from "./core/services/consumer.service";
 import { ProducerService } from "./core/services/producer.service";
 
 //import "./core/services/rabbitmq.service";
-import { Consumer } from "kafkajs";
-import { ConsumerService } from "./core/services/consumer.service";
-import envs from "./config/environment-vars";
 const serverBootstrap = new ServerBootstrap(app);
 const databaseBootstrap = new DatabaseBootstrap();
 const kafkaBootstrap = new KafkaBootstrap();
@@ -29,9 +27,8 @@ const kafkaBootstrap = new KafkaBootstrap();
 
     // Connection to producer
     await ProducerService.connect();
+    await ConsumerService.connect("PE");
     console.log("Connected to Kafka producer");
-    await ConsumerService.connect(envs.kafkaTopicComplete);
-    console.log("Connected to Kafka consumer");
   } catch (error) {
     console.error(error);
     databaseBootstrap.close();

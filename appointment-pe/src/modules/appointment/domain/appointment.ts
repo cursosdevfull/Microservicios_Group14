@@ -72,6 +72,8 @@ export class Appointment {
 
     if (!props.status) {
       this.status = "PENDING";
+    } else {
+      this.status = props.status;
     }
 
     if (!props.createdAt) {

@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity({ name: "appointment" })
+@Entity({ name: "appointment-pe" })
 export class AppointmentEntity {
   @PrimaryColumn()
   appointmentId: string;

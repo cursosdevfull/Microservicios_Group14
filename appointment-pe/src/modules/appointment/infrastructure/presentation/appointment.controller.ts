@@ -16,10 +16,10 @@ export class AppointmentController {
       medicId,
       scheduleId,
       centerId,
+      status: "COMPLETED",
     };
 
     const appointment = new Appointment(props);
-    console.log("appointment", appointment);
     await this.application.save(appointment);
 
     response.status(204).send();

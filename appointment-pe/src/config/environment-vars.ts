@@ -14,7 +14,6 @@ export type ReturnEnvironmentVars = {
   kafkaTopicPE: string;
   kafkaTopicMX: string;
   kafkaTopicCO: string;
-  kafkaTopicComplete: string;
   kafkaGroupId: string;
   clientId: string;
 };
@@ -31,7 +30,6 @@ export type EnvironmentVars = {
   KAFKA_TOPIC_PE: string;
   KAFKA_TOPIC_CO: string;
   KAFKA_TOPIC_MX: string;
-  KAFKA_TOPIC_COMPLETE: string;
   KAFKA_GROUP_ID: string;
   CLIENT_ID: string;
 };
@@ -57,7 +55,6 @@ function validateEnvironmentVars(
       KAFKA_TOPIC_PE: joi.string().required(),
       KAFKA_TOPIC_CO: joi.string().required(),
       KAFKA_TOPIC_MX: joi.string().required(),
-      KAFKA_TOPIC_COMPLETE: joi.string().required(),
       KAFKA_GROUP_ID: joi.string().required(),
       CLIENT_ID: joi.string().required(),
     })
@@ -88,7 +85,6 @@ function loadEnvironmentVars(): ReturnEnvironmentVars {
     kafkaTopicPE: value.KAFKA_TOPIC_PE,
     kafkaTopicCO: value.KAFKA_TOPIC_CO,
     kafkaTopicMX: value.KAFKA_TOPIC_MX,
-    kafkaTopicComplete: value.KAFKA_TOPIC_COMPLETE,
     kafkaGroupId: value.KAFKA_GROUP_ID,
     clientId: value.CLIENT_ID,
   };

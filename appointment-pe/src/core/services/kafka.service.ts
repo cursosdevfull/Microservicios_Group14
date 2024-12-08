@@ -29,12 +29,7 @@ const createTopic = async (topicList: string[]) => {
 };
 
 const connectProducer = async () => {
-  await createTopic([
-    envs.kafkaTopicPE,
-    envs.kafkaTopicCO,
-    envs.kafkaTopicMX,
-    envs.kafkaTopicComplete,
-  ]);
+  await createTopic([envs.kafkaTopicPE, envs.kafkaTopicCO, envs.kafkaTopicMX]);
 
   if (producer) {
     return producer;
