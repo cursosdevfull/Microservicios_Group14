@@ -2,5 +2,5 @@ post http://localhost:3000/appointment
 Content-Type: application/json
 
 {
-    "countryIso": "PE", "patientId": 220, "medicId": 50, "scheduleId": 123, "centerId":6
+    "countryIso": "MX", "patientId": 220, "medicId": 50, "scheduleId": 123, "centerId":6
 }

@@ -1,0 +1,19 @@
+post http://localhost:3040/user
+Content-Type: application/json
+
+{ "firstname": "Carla", "lastname": "Zavala", "email": "carla.zavala@email.com", "password": "12345" }
+
+###
+get http://localhost:3040/user/email/?email=carla.zavala@email.com
+
+###
+post http://localhost:3040/user/login
+Content-Type: application/json
+
+{ "email": "carla.zavala@email.com", "password": "12345" }
+
+###
+post http://localhost:3040/user/validate-access-token
+Content-Type: application/json
+
+{"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJDYXJsYSIsImxhc3RuYW1lIjoiWmF2YWxhIiwiaWF0IjoxNzMzNzA5MDc1LCJleHAiOjE3MzM3MDk2NzV9._YTypsNxx1f3sxhOd_eCoQ2xwQ2AH5PTXJdOAvwe81w"}

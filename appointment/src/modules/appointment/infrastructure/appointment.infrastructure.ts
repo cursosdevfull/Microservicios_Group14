@@ -1,6 +1,11 @@
 import { DatabaseBootstrap } from "../../../bootstrap/database.bootstrap";
 import { ProducerService } from "../../../core/services/producer.service";
-import { Appointment } from "../domain/appointment";
+import {
+  Appointment,
+  AppointmentProps,
+  COUNTRY_ISO,
+  STATUS,
+} from "../domain/appointment";
 import { AppointmentRepository } from "../domain/repositories/appointment.repository";
 import { AppointmentEntity } from "./entities/appoinment.entity";
 
@@ -25,6 +30,10 @@ export class AppointmentInfrastructure implements AppointmentRepository {
     entity.medicId = props.medicId;
     entity.appointmentId = props.appointmentId;
 
+    if (props.updatedAt) {
+      entity.updatedAt = props.updatedAt;
+    }
+
     await repository.save(entity);
   }
 
@@ -34,5 +43,27 @@ export class AppointmentInfrastructure implements AppointmentRepository {
       "appoinment-created",
       appointment.properties().countryIso
     );
+  }
+
+  async getAppointmentById(appointmentId: string): Promise<Appointment | null> {
+    const repository =
+      DatabaseBootstrap.dataSource.getRepository(AppointmentEntity);
+
+    const entity = await repository.findOne({ where: { appointmentId } });
+    if (entity) {
+      const props: AppointmentProps = {
+        appointmentId: entity.appointmentId,
+        countryIso: entity.countryIso as COUNTRY_ISO,
+        patientId: entity.patientId,
+        medicId: entity.medicId,
+        scheduleId: entity.scheduleId,
+        centerId: entity.centerId,
+        status: entity.status as STATUS,
+        createdAt: entity.createdAt,
+      };
+      return new Appointment(props);
+    }
+
+    return null;
   }
 }

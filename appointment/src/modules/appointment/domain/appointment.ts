@@ -29,6 +29,7 @@ export class Appointment {
   private centerId: number;
   private status: STATUS;
   private createdAt: Date;
+  private updatedAt: Date | undefined;
 
   constructor(props: AppointmentProps) {
     if (props.appointmentId) {
@@ -89,6 +90,12 @@ export class Appointment {
       centerId: this.centerId,
       status: this.status,
       createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
     };
+  }
+
+  updateStatus(status: STATUS) {
+    this.status = status;
+    this.updatedAt = new Date();
   }
 }

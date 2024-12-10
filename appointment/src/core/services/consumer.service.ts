@@ -1,5 +1,7 @@
 import { Consumer } from "kafkajs";
 
+import { AppointmentApplication } from "../../modules/appointment/application/appointment.application";
+import { AppointmentInfrastructure } from "../../modules/appointment/infrastructure/appointment.infrastructure";
 import { MessageBrokerKafka } from "./kafka.service";
 
 export class ConsumerService {
@@ -14,12 +16,11 @@ export class ConsumerService {
 
     this.consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
-        console.log("====================================");
-        console.log({
-          topic,
-          partition,
-          value: message.value?.toString(),
-        });
+        const repository = new AppointmentInfrastructure();
+        const application = new AppointmentApplication(repository);
+
+        const { appointmentId, status } = JSON.parse(message.value?.toString());
+        await application.update(appointmentId, status);
       },
     });
   }
