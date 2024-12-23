@@ -2,8 +2,8 @@ services:
   server-mysql:
     image: mysql:8
     container_name: server-mysql
-    ports:
-      - "4100:3306"
+    # ports:
+    #   - "4100:3306"
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: 12345
@@ -112,6 +112,107 @@ services:
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+    networks:
+      - mysql-net
+
+  appointment:
+    image: appointment
+    build:
+      context: ./appointment
+      dockerfile: Dockerfile
+    container_name: appointment
+    restart: unless-stopped
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    # ports:
+    #   - 3000:3000
+    networks:
+      - mysql-net
+
+  appointment-co:
+    image: appointment-co
+    build:
+      context: ./appointment-co
+      dockerfile: Dockerfile
+    container_name: appointment-co
+    restart: unless-stopped
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - mysql-net
+
+  appointment-mx:
+    image: appointment-mx
+    build:
+      context: ./appointment-mx
+      dockerfile: Dockerfile
+    container_name: appointment-mx
+    restart: unless-stopped
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - mysql-net
+
+  appointment-pe:
+    image: appointment-pe
+    build:
+      context: ./appointment-pe
+      dockerfile: Dockerfile
+    container_name: appointment-pe
+    restart: unless-stopped
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    networks:
+      - mysql-net
+
+  auth:
+    image: auth
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: auth
+    restart: unless-stopped
+    # ports:
+    #   - 3050:3050
+    networks:
+      - mysql-net
+
+  user:
+    image: user
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    container_name: user
+    restart: unless-stopped
+    depends_on:
+      server-mysql:
+        condition: service_healthy
+    # ports:
+    #   - 3040:3040
+    networks:
+      - mysql-net
+
+  gateway:
+    image: gateway
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    restart: unless-stopped
+    ports:
+      - 3060:3060
     networks:
       - mysql-net
 

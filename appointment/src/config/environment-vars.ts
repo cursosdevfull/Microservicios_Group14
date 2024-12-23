@@ -1,6 +1,7 @@
-import "dotenv/config";
+import * as dotenv from 'dotenv';
+import * as joi from 'joi';
 
-import * as joi from "joi";
+dotenv.config({ path: ["env.txt"] });
 
 export type ReturnEnvironmentVars = {
   port: number;
@@ -44,6 +45,7 @@ type ValidationEnvironmentVars = {
 function validateEnvironmentVars(
   vars: NodeJS.ProcessEnv
 ): ValidationEnvironmentVars {
+  console.log("vars", vars);
   const envsSchema = joi
     .object({
       PORT: joi.number().required(),

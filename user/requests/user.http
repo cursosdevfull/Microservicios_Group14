@@ -16,4 +16,8 @@ Content-Type: application/json
 post http://localhost:3040/user/validate-access-token
 Content-Type: application/json
 
-{"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJDYXJsYSIsImxhc3RuYW1lIjoiWmF2YWxhIiwiaWF0IjoxNzMzNzA5MDc1LCJleHAiOjE3MzM3MDk2NzV9._YTypsNxx1f3sxhOd_eCoQ2xwQ2AH5PTXJdOAvwe81w"}
+{"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJDYXJsYSIsImxhc3RuYW1lIjoiWmF2YWxhIiwiaWF0IjoxNzM0OTAzNjkzLCJleHAiOjE3MzQ5MDQyOTN9.ELMjDTTcjZKNE7nBamuiy_vXu3aW_2PJic0m4aT2a_c"}
+
+
+###
+get http://localhost:3040/user/refresh-token?refreshToken=4dbf70ea-df12-4b3c-a4ba-947054d2c6f5

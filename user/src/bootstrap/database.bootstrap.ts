@@ -1,8 +1,8 @@
-import { DataSource } from "typeorm";
+import { DataSource } from 'typeorm';
 
-import envs from "../config/environment-vars";
-import { UserEntity } from "../modules/user/adapters/entities/user.entity";
-import { ReturnType, TBootstrap } from "./bootstrap.type";
+import envs from '../config/environment-vars';
+import { UserEntity } from '../modules/user/adapters/entities/user.entity';
+import { ReturnType, TBootstrap } from './bootstrap.type';
 
 export class DatabaseBootstrap implements TBootstrap {
   private static appDataSource: DataSource;
@@ -16,7 +16,7 @@ export class DatabaseBootstrap implements TBootstrap {
       database: envs.mysqlDatabase,
       entities: [UserEntity],
       synchronize: true,
-      logging: true,
+      logging: false,
       poolSize: 100,
     };
 

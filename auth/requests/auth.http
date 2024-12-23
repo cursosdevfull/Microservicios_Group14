@@ -1,0 +1,7 @@
+post http://localhost:3050/auth/login
+Content-Type: application/json
+
+{  "email": "carla.zavala@email.com", "password": "12345" }
+
+###
+get http://localhost:3050/auth/validate-token?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJQYWJsbyIsImxhc3RuYW1lIjoiQmFybGV0dGkiLCJpYXQiOjE3MzQ5MTIwNDcsImV4cCI6MTczNDkxMjY0N30.60YlZA3R-wzBhO5arzwPN2FWc8_95BolpIn7rAJdr-s

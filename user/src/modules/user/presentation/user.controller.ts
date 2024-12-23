@@ -1,9 +1,9 @@
-import { Request, Response } from "express";
-import { v4 as uuidv4 } from "uuid";
+import { Request, Response } from 'express';
+import { v4 as uuidv4 } from 'uuid';
 
-import { User, UserProps } from "../application/user";
-import { UserApplication } from "../application/user.application";
-import { UserService } from "../application/user.service";
+import { User, UserProps } from '../application/user';
+import { UserApplication } from '../application/user.application';
+import { UserService } from '../application/user.service';
 
 export class UserController {
   constructor(private readonly application: UserApplication) {}
@@ -57,6 +57,9 @@ export class UserController {
 
   async login(request: Request, response: Response) {
     const { email, password } = request.body;
+
+    console.log("login", email, password);
+
     const tokens = await this.application.login(email, password);
 
     if (tokens) {
