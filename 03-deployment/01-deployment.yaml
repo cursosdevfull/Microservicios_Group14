@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-web-python
+  labels:
+    env: dev
+    app: frontend
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      env: dev
+      app: frontend
+  template:
+    metadata:
+      labels:
+        env: dev
+        app: frontend
+    spec:
+      containers:
+        - name: serverweb
+          image: python:3.7-alpine
+          command:
+            [
+              "sh",
+              "-c",
+              "echo 'page created by python' > index.html && python -m http.server 8082",
+            ]

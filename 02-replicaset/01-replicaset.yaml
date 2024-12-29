@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-web
+  labels:
+    env: dev
+    app: frontend
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      env: dev
+      app: frontend
+  template:
+    metadata:
+      labels:
+        env: dev
+        app: frontend
+    spec:
+      containers:
+        - name: server-web
+          image: nginx:alpine
