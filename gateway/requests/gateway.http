@@ -1,19 +1,22 @@
-post http://localhost:3060/api/login
+#post http://localhost:3060/api/login
+post http://k8s-default-ingressa-ff4f263e2f-1248019556.us-east-1.elb.amazonaws.com/api/login
 Content-Type: application/json
 
 { "email": "pablo@email.com", "password": "12345" }
 
 ###
-post http://localhost:3060/api/user/create
+#post http://localhost:3060/api/user/create
+post http://k8s-default-ingressa-ff4f263e2f-1248019556.us-east-1.elb.amazonaws.com/api/user/create
 Content-Type: application/json
 
 { "firstname": "Pablo", "lastname": "Barletti", "email": "pablo@email.com", "password": "12345" }
 
 
 ###
-post http://localhost:3060/api/appointment/book
+#post http://localhost:3060/api/appointment/book
+post http://k8s-default-ingressa-ff4f263e2f-1248019556.us-east-1.elb.amazonaws.com/api/appointment/book
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJQYWJsbyIsImxhc3RuYW1lIjoiQmFybGV0dGkiLCJpYXQiOjE3MzQ5MTYzNjAsImV4cCI6MTczNDkxNjk2MH0.XP0DSbzLGUztXhrY2vy7hIp8NNBcctTSslVtA6SNk_o
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdG5hbWUiOiJQYWJsbyIsImxhc3RuYW1lIjoiQmFybGV0dGkiLCJpYXQiOjE3MzU1MjM0MDcsImV4cCI6MTczNTUyNDAwN30.xkBOzt6VWc5VJVcxsouGBR4VRe1ByfZKIYUWbGaTYs4
 
 {
     "countryIso": "MX", 

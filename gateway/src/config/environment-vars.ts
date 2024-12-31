@@ -1,7 +1,7 @@
-import * as dotenv from 'dotenv';
-import * as joi from 'joi';
+///import * as dotenv from 'dotenv';
+import * as joi from "joi";
 
-dotenv.config({ path: ["env.txt"] });
+//dotenv.config({ path: ["env.txt"] });
 
 export type ReturnEnvironmentVars = {
   port: number;
